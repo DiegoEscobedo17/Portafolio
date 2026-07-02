@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Diego Escobedo — Full Stack Developer</title>
+  <meta name="description" content="Diego Escobedo — Full Stack Developer specialized in Python (Django), SQL Server and React Native. I build mission-critical systems and automate the processes behind them. Open to remote roles." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink: '#0A0E14',
+            surface: '#10151E',
+            surface2: '#151C27',
+            line: '#212B39',
+            txt: '#E8EDF2',
+            muted: '#8A97A8',
+            accent: '#E6A94E',
+          },
+          fontFamily: {
+            display: ['"Space Grotesk"', 'sans-serif'],
+            sans: ['"IBM Plex Sans"', 'sans-serif'],
+            mono: ['"IBM Plex Mono"', 'monospace'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <script>document.documentElement.classList.add('js');</script>
+
+  <style>
+    html { scroll-behavior: smooth; }
+    body { background-color: #0A0E14; }
+    ::selection { background: rgba(230,169,78,0.28); color: #fff; }
+
+    /* Blueprint grid — the signature motif */
+    .blueprint {
+      background-image:
+        linear-gradient(to right, rgba(33,43,57,0.55) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(33,43,57,0.55) 1px, transparent 1px);
+      background-size: 46px 46px;
+    }
+    .hero-mask {
+      -webkit-mask-image: radial-gradient(ellipse 90% 70% at 30% 20%, #000 0%, transparent 75%);
+      mask-image: radial-gradient(ellipse 90% 70% at 30% 20%, #000 0%, transparent 75%);
+    }
+    .glow {
+      background: radial-gradient(600px 320px at 15% 0%, rgba(230,169,78,0.14), transparent 70%);
+    }
+
+    /* Scroll reveal — only when JS is present, so content never hides without it */
+    .js .reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1); }
+    .js .reveal.in { opacity: 1; transform: none; }
+
+    a:focus-visible, button:focus-visible { outline: 2px solid #E6A94E; outline-offset: 3px; border-radius: 4px; }
+
+    nav.scrolled { border-color: rgba(33,43,57,1); background-color: rgba(10,14,20,0.82); backdrop-filter: blur(10px); }
+
+    /* Language toggle */
+    .lang-btn { color: #8A97A8; transition: color .2s, background-color .2s; }
+    .lang-btn.lang-active { color: #0A0E14; background-color: #E6A94E; }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .js .reveal { opacity: 1 !important; transform: none !important; transition: none; }
+    }
+  </style>
+</head>
+
+<body class="font-sans text-txt antialiased">
+
+  <!-- NAV -->
+  <nav id="nav" class="fixed top-0 inset-x-0 z-50 border-b border-transparent transition-colors duration-300">
+    <div class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
+      <a href="#top" class="flex items-center gap-2.5 group">
+        <span class="grid place-items-center w-8 h-8 border border-line rounded-md font-mono text-sm text-accent group-hover:border-accent transition-colors">DE</span>
+        <span class="font-display font-semibold tracking-tight hidden sm:inline">Diego Escobedo</span>
+      </a>
+
+      <div class="hidden md:flex items-center gap-8 font-mono text-[13px] text-muted">
+        <a href="#work" class="hover:text-txt transition-colors" data-i18n="nav.work">work</a>
+        <a href="#experience" class="hover:text-txt transition-colors" data-i18n="nav.experience">experience</a>
+        <a href="#stack" class="hover:text-txt transition-colors" data-i18n="nav.stack">stack</a>
+        <a href="#contact" class="hover:text-txt transition-colors" data-i18n="nav.contact">contact</a>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <div class="flex items-center rounded-md border border-line overflow-hidden font-mono text-[12px]" role="group" aria-label="Language">
+          <button type="button" data-lang-btn="en" class="lang-btn px-2.5 py-1">EN</button>
+          <button type="button" data-lang-btn="es" class="lang-btn px-2.5 py-1 border-l border-line">ES</button>
+        </div>
+        <a href="https://github.com/DiegoEscobedo17" target="_blank" rel="noopener" aria-label="GitHub" class="text-muted hover:text-accent transition-colors">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.5v-1.9c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 .1.8-.5 1.5-.7-.1-.9-.5-1.5-.8-1.9-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.7 18.3 5 18.3 5c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.6.8.5 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5Z"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/diego-jaime-escobedo-carrasco-109474244" target="_blank" rel="noopener" aria-label="LinkedIn" class="text-muted hover:text-accent transition-colors">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 2h-17A1.5 1.5 0 0 0 2 3.5v17A1.5 1.5 0 0 0 3.5 22h17a1.5 1.5 0 0 0 1.5-1.5v-17A1.5 1.5 0 0 0 20.5 2zM8 19H5v-9h3v9zM6.5 8.3a1.8 1.8 0 1 1 0-3.6 1.8 1.8 0 0 1 0 3.6zM19 19h-3v-4.7c0-1.1 0-2.5-1.5-2.5s-1.8 1.2-1.8 2.4V19h-3v-9h2.9v1.2h.04c.4-.8 1.4-1.6 2.9-1.6 3.1 0 3.7 2 3.7 4.7V19z"/></svg>
+        </a>
+        <a href="#contact" class="hidden sm:inline-block font-mono text-[13px] px-3.5 py-1.5 rounded-md border border-line text-txt hover:border-accent hover:text-accent transition-colors" data-i18n="nav.cta">Get in touch</a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="top">
+
+    <!-- HERO -->
+    <header class="relative overflow-hidden">
+      <div class="absolute inset-0 blueprint hero-mask" aria-hidden="true"></div>
+      <div class="absolute inset-0 glow" aria-hidden="true"></div>
+
+      <div class="relative max-w-5xl mx-auto px-6 pt-36 pb-20 md:pt-44 md:pb-28">
+        <p class="font-mono text-xs md:text-sm tracking-[0.2em] text-accent mb-6" data-i18n="hero.eyebrow">AREQUIPA, PERU · UTC−5</p>
+
+        <h1 class="font-display font-bold tracking-tight text-4xl sm:text-5xl md:text-6xl leading-[1.05] max-w-3xl" data-i18n-html="hero.h1">
+          I design and ship mission-critical systems — <span class="text-accent">end&nbsp;to&nbsp;end.</span>
+        </h1>
+
+        <p class="mt-7 max-w-2xl text-lg md:text-xl text-muted leading-relaxed" data-i18n-html="hero.sub">
+          Full Stack Developer specialized in <span class="text-txt">Python (Django/Flask)</span>,
+          <span class="text-txt">SQL&nbsp;Server</span> and <span class="text-txt">React&nbsp;Native</span>.
+          Two years turning manual processes into scalable software — from a self-built
+          SUNAT invoicing engine to public-sector platforms used every day.
+        </p>
+
+        <div class="mt-9 flex flex-wrap items-center gap-3">
+          <a href="#work" class="font-mono text-sm px-5 py-2.5 rounded-md bg-accent text-ink font-medium hover:bg-[#f0b968] transition-colors" data-i18n="hero.btnWork">View selected work</a>
+          <a href="https://github.com/DiegoEscobedo17" target="_blank" rel="noopener" class="font-mono text-sm px-5 py-2.5 rounded-md border border-line text-txt hover:border-accent transition-colors">GitHub</a>
+          <a href="mailto:diego.escobedo@tecsup.edu.pe" class="font-mono text-sm px-5 py-2.5 rounded-md border border-line text-txt hover:border-accent transition-colors" data-i18n="hero.btnEmail">Email me</a>
+        </div>
+
+        <div class="mt-9 inline-flex items-center gap-2.5 text-sm text-muted font-mono">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-70"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
+          </span>
+          <span data-i18n="hero.available">Open to remote roles — full overlap with US business hours</span>
+        </div>
+      </div>
+
+      <!-- metric strip -->
+      <div class="relative border-t border-line/70">
+        <div class="max-w-5xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4">
+          <div class="py-7 md:py-8 md:pr-6 border-b md:border-b-0 md:border-r border-line/60">
+            <div class="font-display font-semibold text-3xl md:text-4xl text-txt">~5,000</div>
+            <div class="mt-1 font-mono text-[11px] md:text-xs text-muted tracking-wide" data-i18n="m1.label">e-receipts in production · self-built SUNAT engine</div>
+          </div>
+          <div class="py-7 md:py-8 md:px-6 border-b md:border-b-0 md:border-r border-line/60">
+            <div class="font-display font-semibold text-3xl md:text-4xl text-txt" data-i18n-html="m2.value">days<span class="text-accent">→</span>sec</div>
+            <div class="mt-1 font-mono text-[11px] md:text-xs text-muted tracking-wide" data-i18n="m2.label">asset reporting after Inventario_MDJLBYR</div>
+          </div>
+          <div class="py-7 md:py-8 md:px-6 border-r border-line/60">
+            <div class="font-display font-semibold text-3xl md:text-4xl text-txt">10<span class="text-accent">→</span>2 min</div>
+            <div class="mt-1 font-mono text-[11px] md:text-xs text-muted tracking-wide" data-i18n="m3.label">credential issuance after BustaCard</div>
+          </div>
+          <div class="py-7 md:py-8 md:pl-6">
+            <div class="font-display font-semibold text-3xl md:text-4xl text-txt">16</div>
+            <div class="mt-1 font-mono text-[11px] md:text-xs text-muted tracking-wide" data-i18n="m4.label">enterprise apps led across full SDLC</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ABOUT -->
+    <section id="about" class="max-w-5xl mx-auto px-6 py-20 md:py-28 reveal">
+      <p class="font-mono text-xs tracking-[0.2em] text-accent mb-8" data-i18n="about.eyebrow">// ABOUT</p>
+      <div class="grid md:grid-cols-3 gap-10">
+        <div class="md:col-span-2 space-y-5 text-lg text-muted leading-relaxed">
+          <p data-i18n-html="about.p1">
+            I'm a full-stack developer from Peru who likes owning problems from end to end —
+            requirements, architecture, code, deployment. Most of my work lives in enterprise and
+            public-sector systems: <span class="text-txt">invoicing, inventory, document tracking,
+            access control</span>. I've built systems from scratch where none existed before, and I'm
+            comfortable being the person who figures it out.
+          </p>
+          <p data-i18n-html="about.p2">
+            My core stack is Python (Django/Flask) and Java (Apache Tomcat) on SQL Server and
+            PostgreSQL, with React Native for mobile. I work autonomously, write clearly, and my
+            time zone (UTC−5) overlaps the entire US workday — so real-time remote collaboration is easy.
+          </p>
+        </div>
+        <div class="space-y-6">
+          <div>
+            <p class="font-mono text-[11px] tracking-widest text-muted mb-2" data-i18n="about.focusLabel">FOCUS</p>
+            <p class="text-txt" data-i18n="about.focus">Mission-critical systems &amp; process automation</p>
+          </div>
+          <div>
+            <p class="font-mono text-[11px] tracking-widest text-muted mb-2" data-i18n="about.langLabel">LANGUAGES</p>
+            <p class="text-txt" data-i18n="about.lang1">Spanish — Native</p>
+            <p class="text-txt" data-i18n="about.lang2">English — B1 (reading &amp; conversation)</p>
+          </div>
+          <div>
+            <p class="font-mono text-[11px] tracking-widest text-muted mb-2" data-i18n="about.eduLabel">EDUCATION</p>
+            <p class="text-txt" data-i18n-html="about.edu1">UTP — Software Engineering <span class="text-muted">· in progress</span></p>
+            <p class="text-txt" data-i18n-html="about.edu2">TECSUP — Software Design &amp; Development <span class="text-muted">· Prof. degree, 2023</span></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SELECTED WORK -->
+    <section id="work" class="max-w-5xl mx-auto px-6 py-16 md:py-24 reveal">
+      <div class="flex items-end justify-between mb-10">
+        <p class="font-mono text-xs tracking-[0.2em] text-accent" data-i18n="work.eyebrow">// SELECTED WORK</p>
+        <p class="font-mono text-[11px] text-muted hidden sm:block" data-i18n="work.count">06 projects</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+
+        <article class="group relative flex flex-col rounded-xl border border-line bg-surface p-6 hover:border-accent/60 transition-colors lg:col-span-1 md:col-span-2">
+          <div class="flex items-center justify-between mb-4">
+            <span class="font-mono text-[11px] tracking-wide text-accent px-2 py-1 rounded bg-accent/10" data-i18n="proj.flagship">FLAGSHIP</span>
+            <a href="https://github.com/DiegoEscobedo17/adminPOS" target="_blank" rel="noopener" aria-label="View adminPOS on GitHub" class="text-muted hover:text-accent transition-colors">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+            </a>
+          </div>
+          <h3 class="font-display font-semibold text-lg text-txt" data-i18n="proj1.title">SUNAT Invoicing Engine</h3>
+          <p class="font-mono text-[11px] text-muted mt-1" data-i18n="proj1.ctx">Freelance · proprietary product</p>
+          <p class="mt-3 text-sm text-muted leading-relaxed flex-1" data-i18n="proj1.desc">
+            A SUNAT-compliant e-invoicing engine coded from scratch, with zero dependency on paid
+            third-party providers. It only needs the client's Digital Tax Certificate and issues
+            receipts with no volume limit.
+          </p>
+          <p class="mt-4 font-mono text-xs text-accent" data-i18n="proj1.impact">~5,000 receipts in production</p>
+          <div class="mt-3 flex flex-wrap gap-1.5">
+            <span class="font-mono text-[11px] text-muted border border-line rounded px-2 py-0.5">Python</span>
+            <span class="font-mono text-[11px] text-muted border border-line rounded px-2 py-0.5">Django</span>
+            <span class="font-mono text-[11px] text-muted border border-line rounded px-2 py-0.5">REST</span>
+            <span class="font-mono text-[11px] text-muted border border-line rounded px-2 py-0.5">PostgreSQL</span>
+          </div>
+        </article>
+
+        <article class="group flex flex-col rounded-xl border border-line bg-surface p-6 hover:border-accent/60 transition-colors">
+          <h3 class="font-display font-semibold text-lg text-txt" data-i18n="proj2.title">Inventario_MDJLBYR</h3>
+          <p class="font-mono text-[11px] text-muted mt-1" data-i18n="proj2.ctx">Municipality · built from scratch</p>
+          <p class="mt-3 text-sm text-muted leading-relaxed flex-1" data-i18n="proj2.desc">
+            The organization's first asset-inventory system: registration, current accounts,
+            transfers, valuation and depreciation.
+          </p>
+          <p class="mt-4 font-mono text-xs text-accent" data-i18n="proj2.impact">Reporting: days → seconds</p>
+          <div class="mt-3 flex flex-wrap gap-1.5">
+            <span class="font-mono text-[11px] text-muted border border-line rounded px-2 py-0.5">Django</span>
+            <span class="font-mono text-[11px] text-muted border border-line rounded px-2 py-0.5">SQL Server</span>
+          </div>
+        </article>
+
+        <article class="group flex flex-col rounded-xl border border-line bg-surface p-6 hover:border-accent/60 transition-colors">
+          <h3 class="font-display font-semibold text-lg text-txt" data-i18n="proj3.title">BustaCard</h3>
+          <p class="font-mono text-[11px] text-muted mt-1" data-i18n="proj3.ctx">Municipality · mobile</p>
+          <p class="mt-3 text-sm text-muted leading-relaxed flex-1" data-i18n="proj3.desc">
+            A mobile digital-credential system that rewards taxpayers who pay on time. Automated debt
+            lookups to speed up issuance.
+          </p>
+          <p class="mt-4 font-mono text-xs text-accent" data-i18n="proj3.impact">Issuance: 10 → 2 min</p>
+          <div class="mt-3 flex flex-wrap gap-1.5">
+            <span class="font-mono text-[11px] text-muted border border-line rounded px-2 py-0.5">React Native</span>
+            <span class="font-mono text-[11px] text-muted border border-line rounded px-2 py-0.5">Django</span>
+          </div>
+        </article>
+
+        <article class="group flex flex-col rounded-xl border border-line bg-surface p-6 hover:border-accent/60 transition-colors">
+          <h3 class="font-display font-semibold text-lg text-txt" data-i18n="proj4.title">MAPRO Flowchart Generator</h3>
+          <p class="font-mono text-[11px] text-muted mt-1" data-i18n="proj4.ctx">Municipality</p>
+          <p class="mt-3 text-sm text-muted leading-relaxed flex-1" data-i18n="proj4.desc">
+            A system to dynamically create, visualize and manage flowcharts for institutional
+            administrative processes.
+          </p>
+          <p class="mt-4 font-mono text-xs text-accent" data-i18n="proj4.impact">Dynamic process modeling</p>
+          <div class="mt-3 flex flex-wrap gap-1.5">
+            <span class="font-mono text-[11px] text-muted border border-line rounded px-2 py-0.5">Python</span>
+          </div>
+        </article>
+
+        <article class="group flex flex-col rounded-xl border border-line bg-surface p-6 hover:border-accent/60 transition-colors">
+          <h3 class="font-display font-semibold text-lg text-txt" data-i18n="proj5.title">Document-Tracking System</h3>
+          <p class="font-mono text-[11px] text-muted mt-1" data-i18n="proj5.ctx">Municipality · lead architect</p>
+          <p class="mt-3 text-sm text-muted leading-relaxed flex-1" data-i18n="proj5.desc">
+            Modernized the institution's document-tracking platform, improving traceability and
+            operational efficiency across departments.
+          </p>
+          <p class="mt-4 font-mono text-xs text-accent" data-i18n="proj5.impact">Institution-wide traceability</p>
+          <div class="mt-3 flex flex-wrap gap-1.5">
+            <span class="font-mono text-[11px] text-muted border border-line rounded px-2 py-0.5">Python</span>
+            <span class="font-mono text-[11px] text-muted border border-line rounded px-2 py-0.5">Django</span>
+            <span class="font-mono text-[11px] text-muted border border-line rounded px-2 py-0.5">SQL Server</span>
+          </div>
+        </article>
+
+        <article class="group flex flex-col rounded-xl border border-line bg-surface p-6 hover:border-accent/60 transition-colors">
+          <h3 class="font-display font-semibold text-lg text-txt" data-i18n="proj6.title">Vehicle Maintenance Control</h3>
+          <p class="font-mono text-[11px] text-muted mt-1" data-i18n="proj6.ctx">Municipality · KPI dashboard</p>
+          <p class="mt-3 text-sm text-muted leading-relaxed flex-1" data-i18n="proj6.desc">
+            A KPI dashboard for preventive fleet tracking: insurance (SOAT), technical inspections
+            and fuel consumption.
+          </p>
+          <p class="mt-4 font-mono text-xs text-accent" data-i18n="proj6.impact">Preventive fleet KPIs</p>
+          <div class="mt-3 flex flex-wrap gap-1.5">
+            <span class="font-mono text-[11px] text-muted border border-line rounded px-2 py-0.5">Python</span>
+            <span class="font-mono text-[11px] text-muted border border-line rounded px-2 py-0.5">Django</span>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience" class="max-w-5xl mx-auto px-6 py-16 md:py-24 reveal">
+      <p class="font-mono text-xs tracking-[0.2em] text-accent mb-10" data-i18n="exp.eyebrow">// EXPERIENCE</p>
+
+      <div class="relative border-l border-line pl-8 md:pl-10 space-y-11">
+
+        <div class="relative">
+          <span class="absolute -left-[41px] md:-left-[49px] top-1.5 w-2.5 h-2.5 rounded-full bg-accent ring-4 ring-ink"></span>
+          <p class="font-mono text-xs text-muted" data-i18n="exp1.date">FEB 2024 — PRESENT</p>
+          <h3 class="font-display font-semibold text-xl mt-1" data-i18n="exp1.role">Full Stack Developer</h3>
+          <p class="text-accent text-sm" data-i18n="exp1.company">José Luis Bustamante y Rivero District Municipality</p>
+          <p class="mt-3 text-muted leading-relaxed max-w-2xl" data-i18n="exp1.desc">
+            Led the full software development lifecycle of a 16-application ecosystem automating
+            critical processes across Civil Registry and Logistics. Built BustaCard, Inventario_MDJLBYR,
+            MAPRO and more; modernized the document-tracking system; administered production
+            environments on Apache Tomcat.
+          </p>
+        </div>
+
+        <div class="relative">
+          <span class="absolute -left-[41px] md:-left-[49px] top-1.5 w-2.5 h-2.5 rounded-full bg-accent ring-4 ring-ink"></span>
+          <p class="font-mono text-xs text-muted" data-i18n="exp2.date">2023 — PRESENT</p>
+          <h3 class="font-display font-semibold text-xl mt-1" data-i18n="exp2.role">Full Stack Developer</h3>
+          <p class="text-accent text-sm" data-i18n="exp2.company">Freelance</p>
+          <p class="mt-3 text-muted leading-relaxed max-w-2xl" data-i18n="exp2.desc">
+            Built a proprietary SUNAT-compliant invoicing engine from scratch (~5,000 receipts in
+            production). Ongoing maintenance and support on Django/Flask, REST APIs and PostgreSQL/MySQL.
+          </p>
+        </div>
+
+        <div class="relative">
+          <span class="absolute -left-[41px] md:-left-[49px] top-1.5 w-2.5 h-2.5 rounded-full bg-accent ring-4 ring-ink"></span>
+          <p class="font-mono text-xs text-muted" data-i18n="exp3.date">OCT 2025 — PRESENT</p>
+          <h3 class="font-display font-semibold text-xl mt-1" data-i18n="exp3.role">Founder</h3>
+          <p class="text-accent text-sm" data-i18n="exp3.company">Hatch Code S.A.C.</p>
+          <p class="mt-3 text-muted leading-relaxed max-w-2xl" data-i18n="exp3.desc">
+            Co-founded a software company with a technical team. I own the business vision and the
+            direction of the software development lifecycle, defining the stack, quality standards and
+            workflows for custom projects.
+          </p>
+        </div>
+
+        <div class="relative">
+          <span class="absolute -left-[41px] md:-left-[49px] top-1.5 w-2.5 h-2.5 rounded-full bg-line ring-4 ring-ink"></span>
+          <p class="font-mono text-xs text-muted" data-i18n="exp4.date">JUL 2023 — JAN 2024</p>
+          <h3 class="font-display font-semibold text-xl mt-1" data-i18n="exp4.role">Junior Software Developer</h3>
+          <p class="text-accent text-sm" data-i18n="exp4.company">Beryllium Development Company S.A.C.</p>
+          <p class="mt-3 text-muted leading-relaxed max-w-2xl" data-i18n="exp4.desc">
+            Contributed to an electronic-invoicing ERP for rice mills and to water-management modules;
+            bug fixing and optimization of ongoing projects.
+          </p>
+        </div>
+
+        <div class="relative">
+          <span class="absolute -left-[41px] md:-left-[49px] top-1.5 w-2.5 h-2.5 rounded-full bg-line ring-4 ring-ink"></span>
+          <p class="font-mono text-xs text-muted" data-i18n="exp5.date">AUG 2023 — OCT 2023</p>
+          <h3 class="font-display font-semibold text-xl mt-1" data-i18n="exp5.role">Full Stack Developer</h3>
+          <p class="text-accent text-sm" data-i18n="exp5.company">Mistiano Alexander Swimming Club</p>
+          <p class="mt-3 text-muted leading-relaxed max-w-2xl" data-i18n="exp5.desc">
+            Built a pool management system in Django with attendance control, sales and ticket generation.
+          </p>
+        </div>
+
+        <div class="relative">
+          <span class="absolute -left-[41px] md:-left-[49px] top-1.5 w-2.5 h-2.5 rounded-full bg-line ring-4 ring-ink"></span>
+          <p class="font-mono text-xs text-muted" data-i18n="exp6.date">AUG 2022</p>
+          <h3 class="font-display font-semibold text-xl mt-1" data-i18n="exp6.role">Software Developer &amp; Web Maintenance</h3>
+          <p class="text-accent text-sm" data-i18n="exp6.company">Solmin Service S.A.C.</p>
+          <p class="mt-3 text-muted leading-relaxed max-w-2xl" data-i18n="exp6.desc">
+            Built a Java program to automate invoice filling; maintained and improved the corporate website.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- STACK -->
+    <section id="stack" class="max-w-5xl mx-auto px-6 py-16 md:py-24 reveal">
+      <p class="font-mono text-xs tracking-[0.2em] text-accent mb-10" data-i18n="stack.eyebrow">// STACK</p>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-y-9 gap-x-10">
+        <div>
+          <p class="font-mono text-[11px] tracking-widest text-muted mb-3" data-i18n="stack.core">CORE</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="text-sm text-txt border border-accent/40 bg-accent/5 rounded-md px-3 py-1.5">Python · Django / Flask</span>
+            <span class="text-sm text-txt border border-accent/40 bg-accent/5 rounded-md px-3 py-1.5">Java · Apache Tomcat</span>
+            <span class="text-sm text-txt border border-accent/40 bg-accent/5 rounded-md px-3 py-1.5">SQL Server</span>
+            <span class="text-sm text-txt border border-accent/40 bg-accent/5 rounded-md px-3 py-1.5">React Native</span>
+          </div>
+        </div>
+
+        <div>
+          <p class="font-mono text-[11px] tracking-widest text-muted mb-3" data-i18n="stack.web">WEB</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="text-sm text-muted border border-line rounded-md px-3 py-1.5">JavaScript</span>
+            <span class="text-sm text-muted border border-line rounded-md px-3 py-1.5">React.js</span>
+            <span class="text-sm text-muted border border-line rounded-md px-3 py-1.5">HTML</span>
+            <span class="text-sm text-muted border border-line rounded-md px-3 py-1.5">CSS</span>
+            <span class="text-sm text-muted border border-line rounded-md px-3 py-1.5">REST APIs</span>
+          </div>
+        </div>
+
+        <div>
+          <p class="font-mono text-[11px] tracking-widest text-muted mb-3" data-i18n="stack.mobile">MOBILE</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="text-sm text-muted border border-line rounded-md px-3 py-1.5">React Native</span>
+            <span class="text-sm text-muted border border-line rounded-md px-3 py-1.5">Flutter</span>
+            <span class="text-sm text-muted border border-line rounded-md px-3 py-1.5">Kotlin</span>
+            <span class="text-sm text-muted border border-line rounded-md px-3 py-1.5">Swift</span>
+          </div>
+        </div>
+
+        <div>
+          <p class="font-mono text-[11px] tracking-widest text-muted mb-3" data-i18n="stack.db">DATABASES</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="text-sm text-muted border border-line rounded-md px-3 py-1.5">SQL Server</span>
+            <span class="text-sm text-muted border border-line rounded-md px-3 py-1.5">PostgreSQL</span>
+            <span class="text-sm text-muted border border-line rounded-md px-3 py-1.5">MySQL</span>
+          </div>
+        </div>
+
+        <div>
+          <p class="font-mono text-[11px] tracking-widest text-muted mb-3" data-i18n="stack.tools">TOOLS</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="text-sm text-muted border border-line rounded-md px-3 py-1.5">Git / GitHub</span>
+            <span class="text-sm text-muted border border-line rounded-md px-3 py-1.5">Postman</span>
+            <span class="text-sm text-muted border border-line rounded-md px-3 py-1.5">Scrum / Kanban</span>
+            <span class="text-sm text-muted border border-line rounded-md px-3 py-1.5">Jira · Trello</span>
+          </div>
+        </div>
+
+        <div>
+          <p class="font-mono text-[11px] tracking-widest text-muted mb-3" data-i18n="stack.ai">AI &amp; PRODUCTIVITY</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="text-sm text-muted border border-line rounded-md px-3 py-1.5">GitHub Copilot · Claude</span>
+            <span class="text-sm text-muted border border-line rounded-md px-3 py-1.5" data-i18n="stack.pe">Prompt engineering</span>
+            <span class="text-sm text-muted border border-line rounded-md px-3 py-1.5" data-i18n="stack.cb">Chatbots</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="relative overflow-hidden reveal">
+      <div class="absolute inset-0 blueprint hero-mask opacity-60" aria-hidden="true"></div>
+      <div class="relative max-w-5xl mx-auto px-6 py-24 md:py-32 text-center">
+        <p class="font-mono text-xs tracking-[0.2em] text-accent mb-6" data-i18n="contact.eyebrow">// CONTACT</p>
+        <h2 class="font-display font-bold text-3xl md:text-5xl tracking-tight max-w-2xl mx-auto leading-tight" data-i18n="contact.h2">
+          Let's build something that lasts.
+        </h2>
+        <p class="mt-5 text-muted max-w-xl mx-auto text-lg" data-i18n="contact.sub">
+          Available for remote roles across the Americas and beyond. Email is the fastest way to reach me.
+        </p>
+
+        <div class="mt-9 flex flex-wrap justify-center gap-3">
+          <a href="mailto:diego.escobedo@tecsup.edu.pe" class="font-mono text-sm px-6 py-3 rounded-md bg-accent text-ink font-medium hover:bg-[#f0b968] transition-colors">diego.escobedo@tecsup.edu.pe</a>
+          <a href="https://www.linkedin.com/in/diego-jaime-escobedo-carrasco-109474244" target="_blank" rel="noopener" class="font-mono text-sm px-6 py-3 rounded-md border border-line text-txt hover:border-accent transition-colors">LinkedIn</a>
+          <a href="https://github.com/DiegoEscobedo17" target="_blank" rel="noopener" class="font-mono text-sm px-6 py-3 rounded-md border border-line text-txt hover:border-accent transition-colors">GitHub</a>
+        </div>
+        <p class="mt-6 font-mono text-xs text-muted" data-i18n="contact.loc">+51 915 392 312 · Arequipa, Peru (UTC−5)</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="border-t border-line">
+    <div class="max-w-5xl mx-auto px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <p class="font-mono text-xs text-muted">© <span id="year"></span> Diego Escobedo — Full Stack Developer</p>
+      <p class="font-mono text-xs text-muted" data-i18n="footer.right">Built with care · Peru</p>
+    </div>
+  </footer>
+
+  <script>
+    const I18N = {
+      en: {
+        "doc.title": "Diego Escobedo — Full Stack Developer",
+        "doc.desc": "Diego Escobedo — Full Stack Developer specialized in Python (Django), SQL Server and React Native. I build mission-critical systems and automate the processes behind them. Open to remote roles.",
+        "nav.work": "work", "nav.experience": "experience", "nav.stack": "stack", "nav.contact": "contact", "nav.cta": "Get in touch",
+        "hero.eyebrow": "AREQUIPA, PERU · UTC−5",
+        "hero.h1": "I design and ship mission-critical systems — <span class='text-accent'>end&nbsp;to&nbsp;end.</span>",
+        "hero.sub": "Full Stack Developer specialized in <span class='text-txt'>Python (Django/Flask)</span>, <span class='text-txt'>SQL&nbsp;Server</span> and <span class='text-txt'>React&nbsp;Native</span>. Two years turning manual processes into scalable software — from a self-built SUNAT invoicing engine to public-sector platforms used every day.",
+        "hero.btnWork": "View selected work", "hero.btnEmail": "Email me",
+        "hero.available": "Open to remote roles — full overlap with US business hours",
+        "m1.label": "e-receipts in production · self-built SUNAT engine",
+        "m2.value": "days<span class='text-accent'>→</span>sec",
+        "m2.label": "asset reporting after Inventario_MDJLBYR",
+        "m3.label": "credential issuance after BustaCard",
+        "m4.label": "enterprise apps led across full SDLC",
+        "about.eyebrow": "// ABOUT",
+        "about.p1": "I'm a full-stack developer from Peru who likes owning problems from end to end — requirements, architecture, code, deployment. Most of my work lives in enterprise and public-sector systems: <span class='text-txt'>invoicing, inventory, document tracking, access control</span>. I've built systems from scratch where none existed before, and I'm comfortable being the person who figures it out.",
+        "about.p2": "My core stack is Python (Django/Flask) and Java (Apache Tomcat) on SQL Server and PostgreSQL, with React Native for mobile. I work autonomously, write clearly, and my time zone (UTC−5) overlaps the entire US workday — so real-time remote collaboration is easy.",
+        "about.focusLabel": "FOCUS", "about.focus": "Mission-critical systems & process automation",
+        "about.langLabel": "LANGUAGES", "about.lang1": "Spanish — Native", "about.lang2": "English — B1 (reading & conversation)",
+        "about.eduLabel": "EDUCATION",
+        "about.edu1": "UTP — Software Engineering <span class='text-muted'>· in progress</span>",
+        "about.edu2": "TECSUP — Software Design &amp; Development <span class='text-muted'>· Prof. degree, 2023</span>",
+        "work.eyebrow": "// SELECTED WORK", "work.count": "06 projects", "proj.flagship": "FLAGSHIP",
+        "proj1.title": "SUNAT Invoicing Engine", "proj1.ctx": "Freelance · proprietary product",
+        "proj1.desc": "A SUNAT-compliant e-invoicing engine coded from scratch, with zero dependency on paid third-party providers. It only needs the client's Digital Tax Certificate and issues receipts with no volume limit.",
+        "proj1.impact": "~5,000 receipts in production",
+        "proj2.title": "Inventario_MDJLBYR", "proj2.ctx": "Municipality · built from scratch",
+        "proj2.desc": "The organization's first asset-inventory system: registration, current accounts, transfers, valuation and depreciation.",
+        "proj2.impact": "Reporting: days → seconds",
+        "proj3.title": "BustaCard", "proj3.ctx": "Municipality · mobile",
+        "proj3.desc": "A mobile digital-credential system that rewards taxpayers who pay on time. Automated debt lookups to speed up issuance.",
+        "proj3.impact": "Issuance: 10 → 2 min",
+        "proj4.title": "MAPRO Flowchart Generator", "proj4.ctx": "Municipality",
+        "proj4.desc": "A system to dynamically create, visualize and manage flowcharts for institutional administrative processes.",
+        "proj4.impact": "Dynamic process modeling",
+        "proj5.title": "Document-Tracking System", "proj5.ctx": "Municipality · lead architect",
+        "proj5.desc": "Modernized the institution's document-tracking platform, improving traceability and operational efficiency across departments.",
+        "proj5.impact": "Institution-wide traceability",
+        "proj6.title": "Vehicle Maintenance Control", "proj6.ctx": "Municipality · KPI dashboard",
+        "proj6.desc": "A KPI dashboard for preventive fleet tracking: insurance (SOAT), technical inspections and fuel consumption.",
+        "proj6.impact": "Preventive fleet KPIs",
+        "exp.eyebrow": "// EXPERIENCE",
+        "exp1.date": "FEB 2024 — PRESENT", "exp1.role": "Full Stack Developer", "exp1.company": "José Luis Bustamante y Rivero District Municipality",
+        "exp1.desc": "Led the full software development lifecycle of a 16-application ecosystem automating critical processes across Civil Registry and Logistics. Built BustaCard, Inventario_MDJLBYR, MAPRO and more; modernized the document-tracking system; administered production environments on Apache Tomcat.",
+        "exp2.date": "2023 — PRESENT", "exp2.role": "Full Stack Developer", "exp2.company": "Freelance",
+        "exp2.desc": "Built a proprietary SUNAT-compliant invoicing engine from scratch (~5,000 receipts in production). Ongoing maintenance and support on Django/Flask, REST APIs and PostgreSQL/MySQL.",
+        "exp3.date": "OCT 2025 — PRESENT", "exp3.role": "Founder", "exp3.company": "Hatch Code S.A.C.",
+        "exp3.desc": "Co-founded a software company with a technical team. I own the business vision and the direction of the software development lifecycle, defining the stack, quality standards and workflows for custom projects.",
+        "exp4.date": "JUL 2023 — JAN 2024", "exp4.role": "Junior Software Developer", "exp4.company": "Beryllium Development Company S.A.C.",
+        "exp4.desc": "Contributed to an electronic-invoicing ERP for rice mills and to water-management modules; bug fixing and optimization of ongoing projects.",
+        "exp5.date": "AUG 2023 — OCT 2023", "exp5.role": "Full Stack Developer", "exp5.company": "Mistiano Alexander Swimming Club",
+        "exp5.desc": "Built a pool management system in Django with attendance control, sales and ticket generation.",
+        "exp6.date": "AUG 2022", "exp6.role": "Software Developer & Web Maintenance", "exp6.company": "Solmin Service S.A.C.",
+        "exp6.desc": "Built a Java program to automate invoice filling; maintained and improved the corporate website.",
+        "stack.eyebrow": "// STACK", "stack.core": "CORE", "stack.web": "WEB", "stack.mobile": "MOBILE", "stack.db": "DATABASES", "stack.tools": "TOOLS", "stack.ai": "AI & PRODUCTIVITY",
+        "stack.pe": "Prompt engineering", "stack.cb": "Chatbots",
+        "contact.eyebrow": "// CONTACT", "contact.h2": "Let's build something that lasts.",
+        "contact.sub": "Available for remote roles across the Americas and beyond. Email is the fastest way to reach me.",
+        "contact.loc": "+51 915 392 312 · Arequipa, Peru (UTC−5)",
+        "footer.right": "Built with care · Peru"
+      },
+      es: {
+        "doc.title": "Diego Escobedo — Desarrollador Full Stack",
+        "doc.desc": "Diego Escobedo — Desarrollador Full Stack especializado en Python (Django), SQL Server y React Native. Construyo sistemas de misión crítica y automatizo los procesos detrás de ellos. Disponible para trabajo remoto.",
+        "nav.work": "proyectos", "nav.experience": "experiencia", "nav.stack": "stack", "nav.contact": "contacto", "nav.cta": "Contáctame",
+        "hero.eyebrow": "AREQUIPA, PERÚ · UTC−5",
+        "hero.h1": "Diseño y construyo sistemas de misión crítica — <span class='text-accent'>de principio a fin.</span>",
+        "hero.sub": "Desarrollador Full Stack especializado en <span class='text-txt'>Python (Django/Flask)</span>, <span class='text-txt'>SQL&nbsp;Server</span> y <span class='text-txt'>React&nbsp;Native</span>. Dos años convirtiendo procesos manuales en software escalable — desde un facturador SUNAT hecho a mano hasta plataformas del sector público usadas a diario.",
+        "hero.btnWork": "Ver proyectos", "hero.btnEmail": "Escríbeme",
+        "hero.available": "Disponible para trabajo remoto — solapamiento total con el horario de EE.UU.",
+        "m1.label": "boletas en producción · facturador SUNAT propio",
+        "m2.value": "días<span class='text-accent'>→</span>seg",
+        "m2.label": "reportes de bienes tras Inventario_MDJLBYR",
+        "m3.label": "emisión de credencial tras BustaCard",
+        "m4.label": "apps empresariales lideradas en todo el SDLC",
+        "about.eyebrow": "// SOBRE MÍ",
+        "about.p1": "Soy un desarrollador full-stack de Perú al que le gusta hacerse cargo de los problemas de principio a fin — requerimientos, arquitectura, código, despliegue. La mayor parte de mi trabajo vive en sistemas empresariales y del sector público: <span class='text-txt'>facturación, inventario, trámite documentario, control de accesos</span>. He construido sistemas desde cero donde no existía nada, y estoy cómodo siendo quien lo resuelve.",
+        "about.p2": "Mi stack principal es Python (Django/Flask) y Java (Apache Tomcat) sobre SQL Server y PostgreSQL, con React Native para móvil. Trabajo con autonomía, comunico con claridad y mi zona horaria (UTC−5) se solapa con toda la jornada laboral de EE.UU. — así la colaboración remota en tiempo real es sencilla.",
+        "about.focusLabel": "FOCO", "about.focus": "Sistemas de misión crítica y automatización de procesos",
+        "about.langLabel": "IDIOMAS", "about.lang1": "Español — Nativo", "about.lang2": "Inglés — B1 (lectura y conversación)",
+        "about.eduLabel": "EDUCACIÓN",
+        "about.edu1": "UTP — Ingeniería de Software <span class='text-muted'>· en curso</span>",
+        "about.edu2": "TECSUP — Diseño y Desarrollo de Software <span class='text-muted'>· Titulado, 2023</span>",
+        "work.eyebrow": "// PROYECTOS DESTACADOS", "work.count": "06 proyectos", "proj.flagship": "DESTACADO",
+        "proj1.title": "Facturador SUNAT", "proj1.ctx": "Freelance · producto propio",
+        "proj1.desc": "Un facturador electrónico conforme a SUNAT programado desde cero, sin dependencia de proveedores externos de pago. Solo necesita el Certificado Digital Tributario del cliente y emite comprobantes sin límite de volumen.",
+        "proj1.impact": "~5,000 boletas en producción",
+        "proj2.title": "Inventario_MDJLBYR", "proj2.ctx": "Municipalidad · hecho desde cero",
+        "proj2.desc": "El primer sistema de inventario de la entidad: registro de bienes, cuentas corrientes, traslados, valorización y depreciaciones.",
+        "proj2.impact": "Reportes: días → segundos",
+        "proj3.title": "BustaCard", "proj3.ctx": "Municipalidad · móvil",
+        "proj3.desc": "Un sistema móvil de credencial digital que premia a los contribuyentes puntuales. Automatiza la consulta de deudas para acelerar la emisión.",
+        "proj3.impact": "Emisión: 10 → 2 min",
+        "proj4.title": "Generador de Flujogramas MAPRO", "proj4.ctx": "Municipalidad",
+        "proj4.desc": "Un sistema para crear, visualizar y gestionar dinámicamente los flujogramas de los procesos administrativos institucionales.",
+        "proj4.impact": "Modelado dinámico de procesos",
+        "proj5.title": "Sistema de Trámite Documentario", "proj5.ctx": "Municipalidad · arquitecto principal",
+        "proj5.desc": "Modernicé la plataforma de trámite documentario de la institución, mejorando la trazabilidad y la eficiencia operativa entre áreas.",
+        "proj5.impact": "Trazabilidad en toda la entidad",
+        "proj6.title": "Control de Mantenimiento Vehicular", "proj6.ctx": "Municipalidad · panel de KPIs",
+        "proj6.desc": "Un panel de KPIs para el seguimiento preventivo de la flota: SOAT, revisiones técnicas y consumo de combustible.",
+        "proj6.impact": "KPIs preventivos de flota",
+        "exp.eyebrow": "// EXPERIENCIA",
+        "exp1.date": "FEB 2024 — ACTUALIDAD", "exp1.role": "Desarrollador Full Stack", "exp1.company": "Municipalidad Distrital de José Luis Bustamante y Rivero",
+        "exp1.desc": "Lideré el ciclo de vida completo de desarrollo de un ecosistema de 16 aplicaciones que automatizan procesos críticos en Registro Civil y Logística. Construí BustaCard, Inventario_MDJLBYR, MAPRO y más; modernicé el sistema de trámite documentario; administré los entornos de producción sobre Apache Tomcat.",
+        "exp2.date": "2023 — ACTUALIDAD", "exp2.role": "Desarrollador Full Stack", "exp2.company": "Freelance",
+        "exp2.desc": "Desarrollé desde cero un facturador propio conforme a SUNAT (~5,000 boletas en producción). Mantenimiento y soporte continuo en Django/Flask, APIs REST y PostgreSQL/MySQL.",
+        "exp3.date": "OCT 2025 — ACTUALIDAD", "exp3.role": "Fundador", "exp3.company": "Hatch Code S.A.C.",
+        "exp3.desc": "Cofundé una empresa de software junto a un equipo técnico. Asumo la visión del negocio y la dirección del ciclo de vida de desarrollo, definiendo el stack, los estándares de calidad y los procesos para proyectos a medida.",
+        "exp4.date": "JUL 2023 — ENE 2024", "exp4.role": "Desarrollador de Software Junior", "exp4.company": "Beryllium Development Company S.A.C.",
+        "exp4.desc": "Colaboré en un ERP de facturación electrónica para molinos de arroz y en módulos de gestión del agua; corrección de errores y optimización de proyectos en curso.",
+        "exp5.date": "AGO 2023 — OCT 2023", "exp5.role": "Desarrollador Full Stack", "exp5.company": "Club de Natación Mistiano Alexander",
+        "exp5.desc": "Construí un sistema de administración para la piscina en Django con control de asistencias, ventas y generación de tickets.",
+        "exp6.date": "AGO 2022", "exp6.role": "Desarrollador de Software y Mantenimiento Web", "exp6.company": "Solmin Service S.A.C.",
+        "exp6.desc": "Desarrollé un programa en Java para automatizar el llenado de facturas; mantuve y mejoré el sitio web corporativo.",
+        "stack.eyebrow": "// STACK", "stack.core": "PRINCIPAL", "stack.web": "WEB", "stack.mobile": "MÓVIL", "stack.db": "BASES DE DATOS", "stack.tools": "HERRAMIENTAS", "stack.ai": "IA Y PRODUCTIVIDAD",
+        "stack.pe": "Prompt engineering", "stack.cb": "Chatbots",
+        "contact.eyebrow": "// CONTACTO", "contact.h2": "Construyamos algo que perdure.",
+        "contact.sub": "Disponible para trabajo remoto en América y más allá. El correo es la vía más rápida para contactarme.",
+        "contact.loc": "+51 915 392 312 · Arequipa, Perú (UTC−5)",
+        "footer.right": "Hecho con dedicación · Perú"
+      }
+    };
+
+    function setLang(lang) {
+      const dict = I18N[lang] || I18N.en;
+      document.documentElement.lang = lang;
+      document.querySelectorAll('[data-i18n]').forEach((el) => {
+        const v = dict[el.getAttribute('data-i18n')];
+        if (v !== undefined) el.textContent = v;
+      });
+      document.querySelectorAll('[data-i18n-html]').forEach((el) => {
+        const v = dict[el.getAttribute('data-i18n-html')];
+        if (v !== undefined) el.innerHTML = v;
+      });
+      if (dict['doc.title']) document.title = dict['doc.title'];
+      const md = document.querySelector('meta[name="description"]');
+      if (md && dict['doc.desc']) md.setAttribute('content', dict['doc.desc']);
+      document.querySelectorAll('[data-lang-btn]').forEach((b) => {
+        b.classList.toggle('lang-active', b.getAttribute('data-lang-btn') === lang);
+      });
+    }
+
+    document.querySelectorAll('[data-lang-btn]').forEach((b) => {
+      b.addEventListener('click', () => setLang(b.getAttribute('data-lang-btn')));
+    });
+
+    // Default: follow the browser language (Spanish browsers see Spanish), else English
+    setLang((navigator.language || 'en').toLowerCase().startsWith('es') ? 'es' : 'en');
+
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Nav background on scroll
+    const nav = document.getElementById('nav');
+    const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 24);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // Scroll reveal
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+  </script>
+</body>
+</html>
